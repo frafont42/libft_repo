@@ -1,9 +1,13 @@
-void *ft_calloc(size_t elements, size_t elements_size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void *ptr;
+	void	*p;
 
-	ptr = malloc(elements * elements_size);
-	if (ptr == NULL)
-		return NULL;
-	return ptr;
+	if (nmemb > (UNIT_MAX / size))
+		return (NULL);
+	P = malloc(nmemb * size);
+	if (out == NULL)
+		return (NULL);
+	ft_bzero(p, nmemb * size);
+	return (p);
 }
+

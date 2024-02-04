@@ -34,5 +34,5 @@ char *ft_strtrim(char const *s1, char const *set)
 int main()
 {
 char *str = "ciao sono francesco, un mito, un grande, il roberto saviano della 42";
-	printf("%s", ft_strtrim(str, "csao,"));
+	printf("%s", ft_strtrim(str, " "));
 }

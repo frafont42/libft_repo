@@ -1,24 +1,20 @@
-char *ft_strdup(char *str)
+char *ft_strdup(const char *str)
 {
-	int i;
 	int j;
 	char *ptr;
 
-	i = 0;
 	j = 0;
-	while(str[i] != '\0')
-	{
-		i++;
-	}
-	ptr = (char *)malloc(sizeof(char) * i);
+	ptr = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (ptr == NULL)
+		return (NULL);
+	if (str == NULL)
+		return (NULL);
 	while (str[j] != '\0')
 	{
 		ptr[j] = str[j];
 		j++;
 	}
 	ptr[j] = '\0';
-	if (ptr != NULL)
-		return ptr;
-	else
-		return NULL;
+	return (ptr);
 }
+
