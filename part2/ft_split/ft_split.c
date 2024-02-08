@@ -1,6 +1,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 static size_t	words_counter(const char *str, char c)
 {
@@ -23,6 +24,7 @@ static size_t	words_counter(const char *str, char c)
 		if (str[i] == '\0')
 			return (counter);
 	}
+	return (0);
 }
 
 static size_t	*len_vector(const char *str, char c)
@@ -59,11 +61,13 @@ char	**ft_split(const char *s, char c)
 {
 	char	**arr;
 	size_t	*v;
+	int	i;
 
+	i = 0;
 	if (!s)
 		return (NULL);
 	v = len_vector(s, c);
-	arr = (char **)malloc(sizeof(char *) * words_counter(str, c));
+	arr = (char **)malloc(sizeof(char *) * words_counter(s, c));
 	if (!arr)
 		return (NULL);
 	while (*s)
@@ -81,29 +85,29 @@ char	**ft_split(const char *s, char c)
 	}
 }
 
-
-
-
-
-
-
 int main() {
-    const char *test_string = "12345 123 12 1 1234567 1234567890";
+    const char *test_string = "hello world how are you";
     char separator = ' ';
 
-    // Test della funzione len_vector
-    size_t *result = len_vector(test_string, separator);
+    // Test della funzione ft_split
+    char **result = ft_split(test_string, separator);
 
     if (result == NULL) {
         printf("Errore: allocazione di memoria fallita\n");
         return 1;
     }
-    printf("Lunghezze delle parole separate da '%c':\n", separator);
-    for (size_t i = 0; result[i] != 0; i++) {
-        printf("Parola %zu: %zu caratteri\n", i + 1, result[i]);
+
+    // Stampa le sottostringhe risultanti
+    printf("Sottostringhe separate da '%c':\n", separator);
+    for (size_t i = 0; result[i] != NULL; i++) {
+        printf("Sottostringa %zu: %s\n", i + 1, result[i]);
     }
 
-    free(result); // Ricordati di liberare la memoria allocata
+    // Libera la memoria allocata per le sottostringhe e l'array di puntatori
+    for (size_t i = 0; result[i] != NULL; i++) {
+        free(result[i]);
+    }
+    free(result);
 
     return 0;
 }
